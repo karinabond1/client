@@ -63,26 +63,25 @@
                     <div class="calendar-days flex-container flex-center">Sun</div>
                 </div>-->
                 <div class="flex-container flex-wrap" data-toggle="tooltip" data-placement="top" title="Book it">
-                    <div *ngFor='let day of daysArr' routerLinkActive="active">
-                        <a routerLink="booker_form">
-                            <div class="calendar-days flex-container" (click)="selectedDate(day)" (click)="showDialog=!showDialog"
-                                [ngClass]="{'inactive':!day, 'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
+                    <div *ngFor='let day of daysArr' routerLinkActive="active" class="calendar-days">
+                        <a routerLink="booker_form" class="calendar-days__event-link" 
+                        [ngClass]="{'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
+                            <div class="flex-container" (click)="selectedDate(day)"
+                                >
                                 <!--<div *ngIf="day?.date()<todayCheck(day)">-->
                                     <div class="day-number">{{day?.date()}}</div>
                                 <!--</div>-->
-                                <div class="part">
-                                    <div *ngFor='let event of events | keyvalue'>
-                                        <div>
-                                            <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
-                                                <button type="button" class="btn btn-primary small-btn btn-xs" 
-                                                (click)="showDialog2 = !showDialog2" >
-                                                    {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </a>
+                        <div class="part" *ngIf="events">
+                            <div *ngFor='let event of events | keyvalue'>
+                                <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
+                                    <button type="button" class="btn btn-primary small-btn btn-xs" 
+                                    (click)="showDialog2 = !showDialog2" >
+                                        {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

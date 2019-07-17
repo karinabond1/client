@@ -71,7 +71,7 @@ export class UserComponent implements OnInit{
 
         });*/
 
-        this.http.post("http://gfl:8070//server/api/user/user/",
+        this.http.post("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/user/",
             {
         "email":  e.value.email,
         "password":  e.value.password

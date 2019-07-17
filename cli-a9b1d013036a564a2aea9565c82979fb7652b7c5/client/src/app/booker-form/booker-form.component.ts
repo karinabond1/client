@@ -112,7 +112,7 @@ export class BookerFormComponent implements OnInit {
       //let day2 = day.add('days',7);
       console.log(day2);
     }
-    /*this.http.post("http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/",
+    this.http.post("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/",
       {
         'note': this.form.value.note,
         'start': start,
@@ -139,12 +139,12 @@ export class BookerFormComponent implements OnInit {
             this.error = "Email and/or password is incorrect!";
           }*/
 
-      /*  },
+        },
         error => {
 
           console.log("Error", error);
 
-        })*/
+        })
   }
 
 
@@ -155,7 +155,7 @@ export class BookerFormComponent implements OnInit {
       , { end: end }, { user_id: user_id }
       , { create_date: create_date }, { recurent_d: recurent }
       , { room_id: room_id }];
-    return this.http.post('http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/', body)
+    return this.http.post('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/', body)
       .pipe(
         catchError(this.handleError)
       );
@@ -163,7 +163,7 @@ export class BookerFormComponent implements OnInit {
 
 
   public getUserInfo() {
-    return this.http.get('http://gfl:8070/BOARDROOM_BOOKER/server/api/user/userInfo/' + localStorage.getItem('id'))
+    return this.http.get('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/userInfo/' + localStorage.getItem('id'))
       .pipe(
         catchError(this.handleError)
       );
