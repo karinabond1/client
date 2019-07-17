@@ -1,0 +1,6 @@
+{
+    "/api": {
+      "target": "http://192.168.0.15/~user14/BOARDROOM_BOOKER/client/",
+      "secure": false
+    }
+  }

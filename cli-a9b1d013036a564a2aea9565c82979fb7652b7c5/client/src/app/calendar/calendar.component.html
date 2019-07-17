@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+        <div class="flex-container flex-center col-lg-3">
+            <form (submit)="chooseRoom(form1)" #form1="ngForm">
+                <fieldset>
+                    <legend>Please select the room:</legend>
+                    <div class='form-group'>
+                        <div *ngFor='let room of rooms'>
+                            <input type="radio" id="contactChoice'+{{room.id}}'" ngModel name="roomm" #roomm="ngModel"
+                                value={{room.id}}>
+                            <label for="contactChoice'+{{room.id}}'">{{room.name}}</label>
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="submit" name="btnR" class="btn btn-primary">Choose room</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+        <div class="flex-container flex-center col-lg-9">
+            <div id="calendar" class="flex-container flex-column flex-center">
+                <!--<div>
+                    <form [formGroup]="dateForm" class="flex-container flex-center">
+                        <input class="form-control" type="text" placeholder="Start Date" formControlName="dateFrom" name="dateFrom" >
+                        <div class="width-20px"></div>
+                        <input class="form-control" type="text" placeholder="End Date" formControlName="dateTo" name="dateTo">
+                        <div class="width-20px"></div>
+                        <button class="btn btn-primary">Reserve</button>
+                    </form>
+
+                </div>-->
+                <div class="height-20px"></div>
+                <div class="flex-container flex-center-horz">
+                    <div (click)='prevMonth()'><i class="fas fa-angle-double-left"></i> </div>
+                    <div class="width-20px"></div>
+                    <div>
+                        <h5>{{date.format('MMMM')}} {{date.format('YYYY')}}</h5>
+                    </div>
+                    <div class="width-20px"></div>
+                    <div (click)='nextMonth()'><i class="fas fa-angle-double-right"></i></div>
+                </div>
+                <div class="height-20px"></div>
+                <div class="flex-container flex-center-horz">
+                    <button class="btn btn-warning" (click)='weekFromMon()'>Mon</button>
+                    <div class="width-20px"></div>
+                    <button class="btn btn-warning" (click)='weekFromSun()'>Sun</button>
+                </div>
+                
+                <div class="flex-container ">
+                    <div *ngFor='let day of weekStart' class="week-days calendar-days flex-container flex-center">
+                        {{day}}
+                    </div>
+                </div>
+                <!--<div class="flex-container ">
+                    <div class="calendar-days flex-container flex-center">Sun</div>
+                    <div class="calendar-days flex-container flex-center">Mon</div>
+                    <div class="calendar-days flex-container flex-center">Tue</div>
+                    <div class="calendar-days flex-container flex-center">Wed</div>
+                    <div class="calendar-days flex-container flex-center">Thu</div>
+                    <div class="calendar-days flex-container flex-center">Fri</div>
+                    <div class="calendar-days flex-container flex-center">Sun</div>
+                </div>-->
+                <div class="flex-container flex-wrap" data-toggle="tooltip" data-placement="top" title="Book it">
+                    <div *ngFor='let day of daysArr' routerLinkActive="active">
+                        <a routerLink="booker_form">
+                            <div class="calendar-days flex-container" (click)="selectedDate(day)" (click)="showDialog=!showDialog"
+                                [ngClass]="{'inactive':!day, 'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
+                                <!--<div *ngIf="day?.date()<todayCheck(day)">-->
+                                    <div class="day-number">{{day?.date()}}</div>
+                                <!--</div>-->
+                                <div class="part">
+                                    <div *ngFor='let event of events | keyvalue'>
+                                        <div>
+                                            <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
+                                                <button type="button" class="btn btn-primary small-btn btn-xs" 
+                                                (click)="showDialog2 = !showDialog2" >
+                                                    {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <app-dialog [(visible)]="showDialog">
+        <h1>Hello World</h1>
+           
+    </app-dialog>
+
+        <app-dialog [(visible)]="showDialog2">
+            <h1>Hello World 2</h1>
+               
+    </app-dialog>
+
+
+

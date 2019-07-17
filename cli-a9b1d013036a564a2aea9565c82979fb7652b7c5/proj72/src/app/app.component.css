@@ -1,0 +1,190 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body{
+    background-color: #f2f2f2;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #555;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+
+    margin-top: 70px;
+}
+
+.menu_str {
+    list-style:none;
+}
+.menu_str li {
+    float:left;
+    padding-right:6px;
+}
+
+.red_btn{
+    background-color: #aa2b2b;
+    color: whitesmoke;
+}
+
+.descr {
+    visibility: hidden;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    color: #333;
+}
+
+p{
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+.bed{
+    color: rgb(167, 45, 45);
+}
+
+.centered{
+    text-align: center;
+}
+
+a{
+    color: #d9534f;
+}
+
+a:hover, a:focus{
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+
+
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.navbar{
+    font-weight: 800;
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+}
+
+.navbar-inverse{
+    background: #2d2d2d;
+    border-color: #2d2d2d;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+    background-color: #d9534f;
+}
+
+.navbar-inverse .navbar-brand{
+    color: #999;
+    font-weight: bolder;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+#headerwrap{
+    background: url("img/header-bg.jpg") no-repeat center top;
+    margin-top: -10px;
+    padding-top: 20px;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 500px;
+    width: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#headerwrap h1 {
+    margin-top: 100px;
+    color: white;
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+#headerwrap h2 {
+    color: white;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+#f{
+    background: #2d2d2d;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+#f i{
+    color: #bdbdbd;
+    font-size: 30px;
+    padding: 20px;
+}
+
+#f i:hover{
+    color: #d9534f;
+}
+
+.dropdown:hover > .dropdown-menu{
+    display: block;
+}
+
+.gen{
+    background: white;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.gen div:hover{
+    display: block;
+}
+
+.btn{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btn h5{
+    font-size: 16px;
+}
+
+.books{
+    overflow:hidden;
+    position:relative;
+    width:auto;
+    margin-bottom: 25px;
+    height:250px;
+}
+
+.lefth{
+    text-align: left;
+    margin-top: 20px;
+}
+
+.btnbuy{
+    padding: 25px;
+    font-size: 25px;
+}
+
+.modal-footer{
+    align-items: center;
+}
+

@@ -1,0 +1,81 @@
+<br><br>
+<div class="container">
+    <div class="row centered">
+  <!--<div class="col-lg-6">
+    <h3>Registration!</h3>
+    <form (ngSubmit)="onSubmitReg(form1)" #form1="ngForm">
+      <div class="form-group">
+        <label for="exampleNameR">Name</label>
+        <input required class="form-control" minlength="3" ngModel name="nameR"  #nameR="ngModel"  type="text" id="exampleNameR" aria-describedby="emailHelp" placeholder="Name">
+        <div class="alert alert-danger" *ngIf="nameR.touched && !nameR.valid">
+            <div *ngIf="nameR.errors.required">Name is required!</div>
+            <div *ngIf="nameR.errors.minlength">Name should be minimum {{ nameR.errors.minlength.requiredLength }} characters!</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1R">Email address</label>
+        <input required email class="form-control" minlength="3" ngModel name="emailR" #emailR="ngModel"  type="email" id="exampleInputEmail1R" aria-describedby="emailHelp" placeholder="Enter email">
+          <div class="alert alert-danger" *ngIf="emailR.touched && !emailR.valid">
+              <div *ngIf="emailR.errors.required">Email is required!</div>
+              <div *ngIf="emailR.errors.email">Email is required!</div>
+              <div *ngIf="emailR.errors.minlength">Email should be minimum {{ emailR.errors.minlength.requiredLength }} characters!</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1R">Password</label>
+        <input required class="form-control" minlength="3" ngModel #passwordR="ngModel"  type="password" name="passwordR" id="exampleInputPassword1R" placeholder="Password">
+          <div class="alert alert-danger" *ngIf="passwordR.touched && !passwordR.valid">
+              <div *ngIf="passwordR.errors.required">Password is required!</div>
+              <div *ngIf="passwordR.errors.minlength">Password should be minimum {{ passwordR.errors.minlength.requiredLength }} characters!</div>
+          </div>
+      </div>
+        <input type="submit" name="btnR" class="btn btn-primary" value="Registration" [disabled]="form1.invalid">
+    </form>
+  </div>-->
+
+
+  
+  
+
+        <br><br>
+
+        
+
+  <div class="col-lg-6">
+      <div *ngIf='name' style="text-align:center">
+          <h2>Hello, {{name}}!</h2>
+        </div>
+        <div *ngIf='error' class="red-st">
+          <h3>{{error}}</h3>
+        </div>
+    <h3>Log in!</h3>
+    <form (ngSubmit)="onSubmitLog(form2)" #form2="ngForm" action='#'>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input required email class="form-control" minlength="3" ngModel name="email" #email="ngModel"  type="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                <div *ngIf="email.errors.required">Email is required!</div>
+                <div *ngIf="email.errors.email">Email is required!</div>
+                <div *ngIf="email.errors.minlength">Email should be minimum {{ email.errors.minlength.requiredLength }} characters!</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword">Password</label>
+            <input required class="form-control" minlength="3" ngModel #password="ngModel"  type="password" name="password" id="exampleInputPassword" placeholder="Password">
+            <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                <div *ngIf="password.errors.required">Password is required!</div>
+                <div *ngIf="password.errors.minlength">Password should be minimum {{ password.errors.minlength.requiredLength }} characters!</div>
+            </div>
+        </div>
+        <button  type="submit" name="btnR" class="btn btn-primary"  [disabled]="form2.invalid">Log in</button>
+    </form>
+  </div>
+  <div class='col-lg-6' >
+      <button (click)="onSubmitLogOut()"  type="submit" name="btnL" class="btn btn-danger"  >Log out</button>
+  </div>
+    </div>
+</div>
+
