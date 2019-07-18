@@ -71,7 +71,7 @@ export class UserComponent implements OnInit{
 
         });*/
 
-        this.http.post("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/user/",
+        this.http.post(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/user/user/",
             {
         "email":  e.value.email,
         "password":  e.value.password
@@ -119,7 +119,7 @@ export class UserComponent implements OnInit{
     public postUser(email, password){
         console.log(email+" "+password);
         const body = [{email: email}, {password: password}];
-        return this.http.post('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/user/', body)
+        return this.http.post(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/user/user/', body)
         .pipe(
             catchError(this.handleError)
           );

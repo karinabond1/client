@@ -71,9 +71,13 @@ export class CalendarComponent implements OnInit {
             return false;
         }
         //console.log(day.format('ddd'));
-        //console.log(moment().format('ddd'));
+        //console.log(moment().format('M'));
+        //console.log(day.format('M'));
+        if(day.format('MM')<moment().format('MM')){
+            return false;
+        }
         
-        if(day.format('ddd')=='Sat' || day.format('ddd')=='Sun' || moment().format('L').slice(3).slice(0,2) > day.format('DD')){
+        if( day.format('ddd')=='Sat' || day.format('ddd')=='Sun' || (moment().format('L').slice(3).slice(0,2) > day.format('DD') && day.format('MM')<=moment().format('MM'))){
             return false;
         }else{
             return true;
@@ -95,6 +99,14 @@ export class CalendarComponent implements OnInit {
         for (let n = 0; n < firstDay.weekday()-week; n++) {
             days.unshift(null);
         }
+        this.getEvents(this.idRoom, this.month, this.year).subscribe(data => {
+            if(data){
+                this.events = data;
+                //console.log(this.events);
+            }
+            
+            //this.daysArr = this.createCalender(this.date);
+        });
         /*for (let i = 1; i < days.length; i++) {
             //console.log(days[n].format('YYYY-MM-DD'));
             if(this.events){
@@ -132,6 +144,7 @@ export class CalendarComponent implements OnInit {
 
 
     public selectedDate(day){
+        console.log("dd");
         console.log(day);
         this.transfereService.setData(day);
         /*let dayFormated = day.format('MM/DD/YYYY');
@@ -152,6 +165,7 @@ export class CalendarComponent implements OnInit {
         //console.log(this.date.format('YYYY')+" "+this.date.format('MM'));
         this.getEvents(this.idRoom, this.month, this.year).subscribe(data => {
             this.events = data;
+            console.log(this.events);
             this.daysArr = this.createCalender(this.date);
         });
         
@@ -160,14 +174,14 @@ export class CalendarComponent implements OnInit {
     }
 
     public getRooms(){
-        return this.http.get<Room[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/rooms/')
+        return this.http.get<Room[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/rooms/')
         .pipe(
             catchError(this.handleError)
           );
     }
 
     public getEvents(roomId, month, year){
-        return this.http.get<Event[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/'+roomId+'/'+month+'/'+year)
+        return this.http.get<Event[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/'+roomId+'/'+month+'/'+year)
         .pipe(
             catchError(this.handleError)
           );

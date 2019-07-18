@@ -1,29 +1,39 @@
 <br><br>
+
 <div class="container">
   <div class="row centered">
     <div class="col-lg-6">
+      <div *ngIf="answer">
+          <h3 class="text_answer">{{answer}}</h3>
+      </div>
       <h3>Book a room!</h3>
       <form [formGroup]="form">
         <div class="form-group">
           <label for="exampleInputEmail1R">{{email}}</label>
 
         </div>
+        <div *ngIf="errorDayPick">
+            <h5 class="text_answer">{{errorDayPick}}</h5>
+        </div>
         <div class="form-group">
           <div class="row">
-            <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+            <div class="form-group">
               <input class="form-control" #datepickerYMD="bsDatepicker" bsDatepicker formControlName="dateYMD"
                 [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" required>
             </div>
-            <div class="col-xs-12 col-12 col-md-3 form-group">
+            <div class=" form-group">
               <button class="btn btn-primary" (click)="datepickerYMD.toggle()"
                 [attr.aria-expanded]="datepickerYMD.isOpen">Date Picker</button>
             </div>
           </div>
         </div>
+        <div *ngIf="errorTimePick">
+            <h5 class="text_answer">{{errorTimePick}}</h5>
+        </div>
         <button type="button" class="btn btn-primary" (click)="toggleMode()">12H / 24H</button>
         <div class="form-group">
           <div class="row">
-            <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+            <div class=" form-group">
               <label for="exampleInputEmail1R">Time start:</label>
               <timepicker formControlName="startTime" [showMeridian]="ismeridian" [minuteStep]="15"
                 (isValid)="isValid = $event" [min]="minTime" [max]="maxTime" required></timepicker>
@@ -34,7 +44,7 @@
         </div>
         <div class="form-group">
           <div class="row">
-            <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+            <div class=" form-group">
               <label for="exampleInputEmail1R">Time end:</label>
               <timepicker formControlName="endTime" [minuteStep]="15" [showMeridian]="ismeridian"
                 (isValid)="isValid = $event" [min]="minTime" [max]="maxTime" required>
@@ -45,34 +55,48 @@
         </div>
         <div class="form-group">
           <div class="row">
-            <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+            <div class=" form-group">
               <label for="exampleInputEmail1R">Note:</label>
               <textarea class="form-control" formControlName="note"></textarea>
             </div>
           </div>
         </div>
+        <div *ngIf="errorBiWeekly">
+            <h5 class="text_answer">{{errorBiWeekly}}</h5>
+        </div>
+        <div *ngIf="errorWeekly">
+            <h5 class="text_answer">{{errorWeekly}}</h5>
+        </div>
         <div class="form-group">
           <div class="row">
-            <div class="col-xs-12 col-md-5 col-lg-4 form-group">
-              <label for="exampleInputEmail1R">Recurent event:</label>
-              <br> <button (click)="recEvent(true)" class="btn btn-primary">yes</button>
+              <label for="exampleInputEmail1R">Recurent event:</label><div class="width-20px"></div>
+              <button (click)="recEvent(true)" class="btn btn-primary">Yes</button>
+              <div class="width-20px"></div>
+              <button (click)="recEvent(false)" class="btn btn-primary">No</button>
             </div>
-          </div>
         </div>
         <div class="form-group" *ngIf="recurent">
           <div class="row">
-            <div class="col-xs-6 col-md-6 col-lg-6 form-group">
+            <div class="form-group">
               <label for="exampleInputEmail1R">Specify:</label>
               <br><input formControlName="rec" type="radio" id="weekly" name="rec" value="weekly">
               <label for="weekly">weekly</label>
+              <br><input class="form-control"  formControlName="numberWeeks"
+                type="number" id="weeklyWe" name="numberWeeks"
+                min="1" max="4"><span class="validity"></span>
+              
+                
               <br><input formControlName="rec" type="radio" id="bi_weekly" name="rec" value="bi_weekly">
               <label for="bi_weekly">bi-weekly</label>
+              <br><input class="form-control" formControlName="numberWeeksBi"
+                type="number" id="weeklyBi" name="numberWeeksBi"
+                min="1" max="2"><span class="validity"></span>
+              
+              
               <br><input formControlName="rec" type="radio" id="monthly" name="rec" value="monthly">
               <label for="monthly">monthly</label>
               <br>
-              <label for="exampleInputEmail1R">If weekly or bi-weekly, specify the number of weeks:</label>
-              <br><input (isValid)="isValid = $event" class="form-control" [max]="maxWeek" formControlName="numberWeeks"
-                type="number" id="weekly" name="numberWeeks">
+              
             </div>
             <pre *ngIf="!isValid" class="alert alert-danger">Invalid time format</pre>
           </div>

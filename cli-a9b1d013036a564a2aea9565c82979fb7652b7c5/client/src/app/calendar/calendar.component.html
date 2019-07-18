@@ -19,7 +19,8 @@
             </form>
 
         </div>
-        <div class="flex-container flex-center col-lg-9">
+        
+        <div class="flex-container flex-center col-lg-9" *ngIf="idRoom">
             <div id="calendar" class="flex-container flex-column flex-center">
                 <!--<div>
                     <form [formGroup]="dateForm" class="flex-container flex-center">
@@ -64,10 +65,9 @@
                 </div>-->
                 <div class="flex-container flex-wrap" data-toggle="tooltip" data-placement="top" title="Book it">
                     <div *ngFor='let day of daysArr' routerLinkActive="active" class="calendar-days">
-                        <a routerLink="booker_form" class="calendar-days__event-link" 
+                        <a routerLink="booker_form" class="calendar-days__event-link" (click)="selectedDate(day)"
                         [ngClass]="{'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
-                            <div class="flex-container" (click)="selectedDate(day)"
-                                >
+                            <div class="flex-container" >
                                 <!--<div *ngIf="day?.date()<todayCheck(day)">-->
                                     <div class="day-number">{{day?.date()}}</div>
                                 <!--</div>-->
@@ -75,10 +75,12 @@
                         </a>
                         <div class="part" *ngIf="events">
                             <div *ngFor='let event of events | keyvalue'>
-                                <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
-                                    <button type="button" class="btn btn-primary small-btn btn-xs" 
-                                    (click)="showDialog2 = !showDialog2" >
-                                        {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
+                                <div *ngIf="event" >
+                                    <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
+                                        <button type="button" class="btn btn-primary small-btn btn-xs" 
+                                        (click)="showDialog2 = !showDialog2" >
+                                            {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
