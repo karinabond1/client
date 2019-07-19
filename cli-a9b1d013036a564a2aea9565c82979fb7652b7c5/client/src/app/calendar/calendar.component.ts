@@ -223,7 +223,7 @@ export class CalendarComponent implements OnInit {
         if (this.form.value.rec === true) {
             rec = '+';
         }
-        this.http.put(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/", {
+        this.http.put("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/", {
             start: start,
             end: end,
             note: this.form.value.note,
@@ -258,7 +258,7 @@ export class CalendarComponent implements OnInit {
         if (this.form.value.rec === true) {
             rec = '+';
         }
-        this.http.delete(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/" + localStorage.getItem('event_id') + "/" + rec
+        this.http.delete("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/" + localStorage.getItem('event_id') + "/" + rec
         )
             .subscribe(
                 data => {
@@ -282,7 +282,7 @@ export class CalendarComponent implements OnInit {
     }
 
     public getUserInfo(id) {
-        return this.http.get(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/user/userInfo/' + id)
+        return this.http.get('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/userInfo/' + id)
             .pipe(
                 catchError(this.handleError)
             );
@@ -292,14 +292,14 @@ export class CalendarComponent implements OnInit {
 
 
     public getRooms() {
-        return this.http.get<Room[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/rooms/')
+        return this.http.get<Room[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/rooms/')
             .pipe(
                 catchError(this.handleError)
             );
     }
 
     public getEvents(roomId, month, year) {
-        return this.http.get<Event[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/' + roomId + '/' + month + '/' + year)
+        return this.http.get<Event[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/' + roomId + '/' + month + '/' + year)
             .pipe(
                 catchError(this.handleError)
             );
@@ -315,5 +315,5 @@ export class CalendarComponent implements OnInit {
         }
         return throwError(
             'Something bad happened; please try again later.');
-    };
+    }
 }

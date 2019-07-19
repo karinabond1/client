@@ -10,6 +10,7 @@
     text-align: center;
     padding: 5px;
     position: relative;
+    overflow-y: auto;
 }
 .calendar-days__event-link{
     position: absolute;
@@ -31,8 +32,7 @@ div.hover-efect:hover{
     margin-top: 23px;
     z-index: 1;
     position: relative;
-    overflow-y: auto!important;
-    height: calc(100% - 23px);
+    /* overflow-y: auto!important; */
 }
 .small-btn{
     font-size: 10px;

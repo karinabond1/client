@@ -54,15 +54,6 @@
                         {{day}}
                     </div>
                 </div>
-                <!--<div class="flex-container ">
-                    <div class="calendar-days flex-container flex-center">Sun</div>
-                    <div class="calendar-days flex-container flex-center">Mon</div>
-                    <div class="calendar-days flex-container flex-center">Tue</div>
-                    <div class="calendar-days flex-container flex-center">Wed</div>
-                    <div class="calendar-days flex-container flex-center">Thu</div>
-                    <div class="calendar-days flex-container flex-center">Fri</div>
-                    <div class="calendar-days flex-container flex-center">Sun</div>
-                </div>-->
                 <div class="flex-container flex-wrap" data-toggle="tooltip" data-placement="top" title="Book it">
                     <div *ngFor='let day of daysArr' routerLinkActive="active" class="calendar-days">
                         <a routerLink="booker_form" class="calendar-days__event-link" (click)="selectedDate(day)"
@@ -75,7 +66,7 @@
                         </a>
                         <div class="part" *ngIf="events">
                             <div *ngFor='let event of events | keyvalue'>
-                                <div *ngIf="event">
+                                <div *ngIf='event'>
                                     <div
                                         *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
                                         <button type="button" class="btn btn-primary small-btn btn-xs"
