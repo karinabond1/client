@@ -19,7 +19,7 @@
             </form>
 
         </div>
-        
+
         <div class="flex-container flex-center col-lg-9" *ngIf="idRoom">
             <div id="calendar" class="flex-container flex-column flex-center">
                 <!--<div>
@@ -48,7 +48,7 @@
                     <div class="width-20px"></div>
                     <button class="btn btn-warning" (click)='weekFromSun()'>Sun</button>
                 </div>
-                
+
                 <div class="flex-container ">
                     <div *ngFor='let day of weekStart' class="week-days calendar-days flex-container flex-center">
                         {{day}}
@@ -66,19 +66,20 @@
                 <div class="flex-container flex-wrap" data-toggle="tooltip" data-placement="top" title="Book it">
                     <div *ngFor='let day of daysArr' routerLinkActive="active" class="calendar-days">
                         <a routerLink="booker_form" class="calendar-days__event-link" (click)="selectedDate(day)"
-                        [ngClass]="{'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
-                            <div class="flex-container" >
+                            [ngClass]="{'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
+                            <div class="flex-container">
                                 <!--<div *ngIf="day?.date()<todayCheck(day)">-->
-                                    <div class="day-number">{{day?.date()}}</div>
+                                <div class="day-number">{{day?.date()}}</div>
                                 <!--</div>-->
                             </div>
                         </a>
                         <div class="part" *ngIf="events">
                             <div *ngFor='let event of events | keyvalue'>
-                                <div *ngIf="event" >
-                                    <div *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
-                                        <button type="button" class="btn btn-primary small-btn btn-xs" 
-                                        (click)="showDialog2 = !showDialog2" >
+                                <div *ngIf="event">
+                                    <div
+                                        *ngIf="event.value.create_date.slice(8)==day?.date() && event.value.create_date.slice(0,4)==day?.year() && event.value.create_date.slice(5).slice(0,2)==day?.month()+1">
+                                        <button type="button" class="btn btn-primary small-btn btn-xs"
+                                            (click)="showDialog2 = !showDialog2" (click)='showEventInfo(event.value)'>
                                             {{event.value.start.slice(0,5)}} - {{event.value.end.slice(0,5)}}</button>
                                     </div>
                                 </div>
@@ -91,15 +92,65 @@
     </div>
 </div>
 
-    <app-dialog [(visible)]="showDialog">
-        <h1>Hello World</h1>
-           
-    </app-dialog>
 
-        <app-dialog [(visible)]="showDialog2">
-            <h1>Hello World 2</h1>
-               
-    </app-dialog>
+<app-dialog [(visible)]="showDialog2">
+    <div class="container">
+        <div class="row centered">
+            <div class="col-lg-12 center">
+                <h2>{{deleteAnswer}}</h2>
+                <h2>Details</h2>
+                <div [ngClass]="{'inactive':!eventLast}">
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1R">{{email}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1R">{{eventCreatedDay}}</label>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="toggleMode()">12H / 24H</button>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="exampleInputEmail1R">Time start:</label>
+                                <timepicker formControlName="startTime" [showMeridian]="ismeridian" [minuteStep]="15"
+                                    [min]="minTime" [max]="maxTime" required></timepicker>
 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="exampleInputEmail1R">Time end:</label>
+                                <timepicker formControlName="endTime" [minuteStep]="15" [showMeridian]="ismeridian"
+                                    [min]="minTime" [max]="maxTime" required>
+                                </timepicker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="exampleInputEmail1R">Note:</label>
+                                <textarea class="form-control" formControlName="note"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf='recurentEvent'>
+                            <div class="row">
+                                <input formControlName="rec" type="checkbox" id="weekly" name="rec" value="weekly">
+                                <label for="weekly">Apply to all occurences?</label>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf='actionUser'>
+                            <div class="row">
+                                <button (click)="update()" type="submit" name="btnUpdate" class="btn btn-success"
+                                    [disabled]="form.invalid">Update</button>
+                                <button (click)="delete()" type="submit" name="btnDelete" class="btn btn-danger margin-20px"
+                                    [disabled]="form.invalid">Delete</button>
+                            </div>
+                        </div>
 
+                    </form>
 
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</app-dialog>

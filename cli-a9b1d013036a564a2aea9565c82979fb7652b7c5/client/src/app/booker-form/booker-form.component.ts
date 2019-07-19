@@ -174,6 +174,8 @@ export class BookerFormComponent implements OnInit {
 
         if (somesss == 'yes') {
           this.postEvent(start, end, allDate, rec);
+        }else{
+          this.answer = somesss;
         }
 
 
@@ -214,6 +216,7 @@ export class BookerFormComponent implements OnInit {
               bool = false;
             }
             if (!bool) {
+              this.answer = arrAnswerCheck[i];
               break;
             }
           }
@@ -253,6 +256,7 @@ export class BookerFormComponent implements OnInit {
               bool = false;
             }
             if (!bool) {
+              this.answer = arrAnswerCheck[i];
               break;
             }
           }
@@ -287,6 +291,8 @@ export class BookerFormComponent implements OnInit {
         if (arrAnswerCheck[0] == 'yes' && arrAnswerCheck[1] == 'yes') {
           this.postEvent(start, end, day1.format('YYYY-MM-DD'), day1.format('YYYY-MM-DD'));
           this.postEvent(start, end, day2.format('YYYY-MM-DD'), day1.format('YYYY-MM-DD'))
+        }else{
+          this.answer = 'There is the same event on this day. Please, change it!';
         }
         /*for(let i=0; i<arrAnswerCheck.length; i++){
           if(arrAnswerCheck[i]!='yes'){

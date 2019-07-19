@@ -62,7 +62,7 @@ export class UserComponent implements OnInit{
 
    /*onclick="window.location.reload();"*/
     onSubmitLog(e) {
-        //console.log(e.value.password);
+        //console.log(e.value);
         /*this.postUser(e.value.email,e.value.password).subscribe(data => {
             console.log(data);
 
@@ -71,7 +71,7 @@ export class UserComponent implements OnInit{
 
         });*/
 
-        this.http.post(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/user/user/",
+        this.http.put(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/user/user/",
             {
         "email":  e.value.email,
         "password":  e.value.password

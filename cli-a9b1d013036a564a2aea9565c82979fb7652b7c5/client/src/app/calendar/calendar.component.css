@@ -46,13 +46,17 @@ div.hover-efect:hover{
 #calendar{
     width: 840px;
 }
-
+.center{
+    text-align: center;
+}
 .inactive{
     opacity: 0.6;
     pointer-events:none;
 }
 
-
+.margin-20px{
+    margin-left: 20px;
+}
 button.active{
     background-color: #752c8f;
     pointer-events:inherit;
@@ -73,7 +77,7 @@ div.inactive{
 
 
 h1 {
-    color: #00bcd4;
+    color: #000000;
 }
 
 .fill-height-or-more {
