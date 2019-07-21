@@ -78,9 +78,6 @@ export class CalendarComponent implements OnInit {
         if (!day) {
             return false;
         }
-        //console.log(day.format('ddd'));
-        //console.log(moment().format('M'));
-        //console.log(day.format('M'));
         if (day.format('MM') < moment().format('MM')) {
             return false;
         }
@@ -92,7 +89,7 @@ export class CalendarComponent implements OnInit {
         }
     }
 
-    createCalender(month) {
+    public createCalender(month) {
         let week = 0;
         if (!this.weekStartTrue) {
             week = 1;
@@ -131,8 +128,6 @@ export class CalendarComponent implements OnInit {
 
 
     public selectedDate(day) {
-        console.log("dd");
-        console.log(day);
         this.transfereService.setData(day);
     }
 
@@ -141,11 +136,10 @@ export class CalendarComponent implements OnInit {
         localStorage.setItem('room_id', e.value.roomm);
         this.getEvents(this.idRoom, this.month, this.year).subscribe(data => {
             this.events = data;
-            console.log(this.events);
             this.daysArr = this.createCalender(this.date);
         });
     }
-    toggleMode(): void {
+    public toggleMode(): void {
         this.ismeridian = !this.ismeridian;
     }
 
@@ -164,16 +158,14 @@ export class CalendarComponent implements OnInit {
         this.getUserInfo(event.user_id).subscribe(data => {
             this.email = data[0].email;
         });
-        console.log(event);
         this.eventCreatedDay = event.create_date;
         if (event.recurent_id != null) {
             this.recurentEvent = true;
         }
-        console.log(event.user_id + " " + localStorage.getItem('id'));
         if (event.user_id != localStorage.getItem('id')) {
             this.actionUser = false;
         }
-        if(localStorage.getItem('role')=='admin'){
+        if (localStorage.getItem('role') == 'admin') {
             this.actionUser = true;
         }
         localStorage.setItem('event_id', event.id);
@@ -186,14 +178,11 @@ export class CalendarComponent implements OnInit {
         this.form.setValue({ startTime: startTime, endTime: endTime, note: event.note, rec: "" });
         if ((moment().format('L').slice(3).slice(0, 2) >= event.create_date.slice(8) && event.create_date.slice(5).slice(0, 2) <= moment().format('MM')) && (event.start.slice(0, 5) < moment().format('HH:MM') || event.end.slice(0, 5) < moment().format('HH:MM'))) {
             this.eventLast = false;
-        } else {
-            console.log('yes');
         }
     }
 
     public update() {
         let note = this.form.value.note;
-        console.log(this.form.value);
         let startMin = this.form.value.startTime.getMinutes();
         let endMin = this.form.value.endTime.getMinutes();
         let startHou = this.form.value.startTime.getHours();
@@ -223,7 +212,7 @@ export class CalendarComponent implements OnInit {
         if (this.form.value.rec === true) {
             rec = '+';
         }
-        this.http.put("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/", {
+        this.http.put(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/", {
             start: start,
             end: end,
             note: this.form.value.note,
@@ -233,56 +222,44 @@ export class CalendarComponent implements OnInit {
         })
             .subscribe(
                 data => {
-                    console.log("POST Request is successful ", data);
-                    console.log(data);
                     if (data === 'Ok!') {
                         this.getEvents(this.idRoom, this.month, this.year).subscribe(data => {
                             this.events = data;
-                            console.log(this.events);
                             this.daysArr = this.createCalender(this.date);
                         });
                     }
                     this.deleteAnswer = data;
                 },
                 error => {
-
-                    console.log("Error", error);
-
                 })
     }
 
-    
+
     public delete() {
         this.deleteAnswer = "";
         let rec = "-";
         if (this.form.value.rec === true) {
             rec = '+';
         }
-        this.http.delete("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/event/" + localStorage.getItem('event_id') + "/" + rec
+        this.http.delete(/*"http://192.168.0.15/~user14/*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/event/" + localStorage.getItem('event_id') + "/" + rec
         )
             .subscribe(
                 data => {
-                    console.log("POST Request is successful ", data);
-                    console.log(data);
                     if (data === 'Ok!') {
                         this.getEvents(this.idRoom, this.month, this.year).subscribe(data => {
                             this.events = data;
-                            console.log(this.events);
                             this.daysArr = this.createCalender(this.date);
                         });
                     }
                     this.deleteAnswer = data;
                 },
                 error => {
-
-                    console.log("Error", error);
-
                 })
 
     }
 
-    public getUserInfo(id) {
-        return this.http.get('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/userInfo/' + id)
+    private getUserInfo(id) {
+        return this.http.get(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/user/userInfo/' + id)
             .pipe(
                 catchError(this.handleError)
             );
@@ -291,15 +268,15 @@ export class CalendarComponent implements OnInit {
 
 
 
-    public getRooms() {
-        return this.http.get<Room[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/rooms/')
+    private getRooms() {
+        return this.http.get<Room[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/rooms/')
             .pipe(
                 catchError(this.handleError)
             );
     }
 
-    public getEvents(roomId, month, year) {
-        return this.http.get<Event[]>('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/' + roomId + '/' + month + '/' + year)
+    private getEvents(roomId, month, year) {
+        return this.http.get<Event[]>(/*'http://192.168.0.15/~user14/*/'http://gfl:8070/BOARDROOM_BOOKER/server/api/calendar/eventsByMonth/' + roomId + '/' + month + '/' + year)
             .pipe(
                 catchError(this.handleError)
             );

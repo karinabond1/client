@@ -9,22 +9,6 @@ import { throwError } from "rxjs";
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css'],
-    /*template: `<div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" name="email" [(ngModel)]="user.email" />
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" type="password" name="password" [(ngModel)]="user.password" />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-default" (click)="submit(user)">Sendd</button>
-                </div>
-                <div *ngIf="done">
-                    <div>Получено от сервера:</div>
-                    <div>Имя: {{receivedUser.email}}</div>
-                    <div>Возраст: {{receivedUser.password}}</div>
-                </div>`,*/
     providers: []
 })
 export class UserComponent implements OnInit{
@@ -33,9 +17,6 @@ export class UserComponent implements OnInit{
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
           'Authorization': 'my-auth-token',
-          //'Content-Type': 'Access-Control-Allow-Headers',
-          //'POST,GET,OPTIONS,PUT,DELETE': 'Access-Control-Allow-Methods'
-
         })
     };
 
@@ -43,7 +24,6 @@ export class UserComponent implements OnInit{
     public user;
     public receivedUser: User;
     public done: boolean = false;
-    //public dataService: DataService;
     public name = localStorage.getItem('name');
     public error = '';
 
@@ -51,7 +31,6 @@ export class UserComponent implements OnInit{
 
     
     onSubmitLogOut(){
-        console.log('f');
         localStorage.removeItem('id');
         localStorage.removeItem('name');
         localStorage.removeItem('status');
@@ -60,26 +39,15 @@ export class UserComponent implements OnInit{
         window.location.reload();
     }
 
-   /*onclick="window.location.reload();"*/
     onSubmitLog(e) {
-        //console.log(e.value);
-        /*this.postUser(e.value.email,e.value.password).subscribe(data => {
-            console.log(data);
-
-            this.user = data
-        console.log(this.user);
-
-        });*/
-
-        this.http.put("http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/user/",
+        this.http.put(/*"http://192.168.0.15/~user14*/"http://gfl:8070/BOARDROOM_BOOKER/server/api/user/user/",
             {
         "email":  e.value.email,
         "password":  e.value.password
         })
         .subscribe(
             data  => {
-                console.log("POST Request is successful ", data);
-                if(Array.isArray(data)){
+                if(Array.isArray(data) && data[0]['status']==1){
                     this.user = data;
                     localStorage.setItem('id', data[0]['id']);
                     localStorage.setItem('name', data[0]['name']);
@@ -95,9 +63,6 @@ export class UserComponent implements OnInit{
                 
             },
             error  => {
-
-            console.log("Error", error);
-
             }
 
         );
@@ -105,39 +70,9 @@ export class UserComponent implements OnInit{
     
 
     ngOnInit(){
-        //this.postUser('karina@gmail.com','111').subscribe(data => this.user = data);
+        
     }
-
-    /*submit(user: User){
-        this.dataService.postData(user)
-                .subscribe(
-                    (data: User) => {this.receivedUser=data; this.done=true;},
-                    error => console.log(error)
-                );
-    }*/
-
-    public postUser(email, password){
-        console.log(email+" "+password);
-        const body = [{email: email}, {password: password}];
-        return this.http.post('http://192.168.0.15/~user14/BOARDROOM_BOOKER/server/api/user/user/', body)
-        .pipe(
-            catchError(this.handleError)
-          );
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-          console.error('An error occurred:', error.error.message);
-        } else {
-          console.error(
-            `Backend returned code ${error.status}, ` +
-            `body was: ${error.error}`);
-        }
-        return throwError(
-          'Something bad happened; please try again later.');
-    };
-
-   
+  
 
 }
 

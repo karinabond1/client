@@ -22,16 +22,6 @@
 
         <div class="flex-container flex-center col-lg-9" *ngIf="idRoom">
             <div id="calendar" class="flex-container flex-column flex-center">
-                <!--<div>
-                    <form [formGroup]="dateForm" class="flex-container flex-center">
-                        <input class="form-control" type="text" placeholder="Start Date" formControlName="dateFrom" name="dateFrom" >
-                        <div class="width-20px"></div>
-                        <input class="form-control" type="text" placeholder="End Date" formControlName="dateTo" name="dateTo">
-                        <div class="width-20px"></div>
-                        <button class="btn btn-primary">Reserve</button>
-                    </form>
-
-                </div>-->
                 <div class="height-20px"></div>
                 <div class="flex-container flex-center-horz">
                     <div (click)='prevMonth()'><i class="fas fa-angle-double-left"></i> </div>
@@ -59,9 +49,7 @@
                         <a routerLink="booker_form" class="calendar-days__event-link" (click)="selectedDate(day)"
                             [ngClass]="{'today':todayCheck(day), 'inactive':!weekendCheck(day)}">
                             <div class="flex-container">
-                                <!--<div *ngIf="day?.date()<todayCheck(day)">-->
                                 <div class="day-number">{{day?.date()}}</div>
-                                <!--</div>-->
                             </div>
                         </a>
                         <div class="part" *ngIf="events">

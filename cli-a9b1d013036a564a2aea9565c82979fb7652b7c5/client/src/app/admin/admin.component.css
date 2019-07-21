@@ -4,3 +4,22 @@
 .margin-botton-20px{
     margin-bottom: 20px;
 }
+.hide{
+    visibility: hidden;
+}
+.inactive{
+    opacity: 0.6;
+    pointer-events:none;
+}
+.margin-botton-50px{
+    margin-bottom: 50px;
+}
+.center{
+    text-align: center;
+}
+.btn-yes{
+    display: inline-block;
+}
+.answer{
+    color: darkred;
+}

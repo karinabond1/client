@@ -2,19 +2,28 @@
 <div class="container">
   <div class="row centered">
     <div class="col-lg-12">
-      <div *ngFor='let user of allUsers'>
-        <p><a href="{{user.email_to}}">{{user.name}}</a>
-          <button (click)="update()" type="submit" name="btnUpdate" class="btn btn-success margin-20px">
-            Update</button>
-          <button (click)="delete()" type="submit" name="btnDelete" class="btn btn-danger margin-20px">
-            Delete</button></p>
+      <h3 class="answer">{{answer}}</h3>
+      <div *ngFor='let user of allUsers' class="margin-botton-50px">
+        <h4><a href="{{user.email_to}}">{{user.name}}</a>
+          <button (click)='idForUpdate(user.id)' (click)="updateDialog = !updateDialog" type="submit" name="btnUpdate"
+            class="btn btn-success margin-20px">
+            Edit</button>
+          <button (click)="deleteDialog = !deleteDialog" (click)="idForDelete(user.id)" type="submit" name="btnDelete"
+            class="btn btn-danger margin-20px">
+            Delete</button>
+          <h5>Status:
+            <span *ngIf='user.status==1'> existing</span>
+            <span *ngIf='user.status==0'> remote</span>
+          </h5>
+        </h4>
+
       </div>
       <div>
         <button (click)="addUser()" type="submit" name="btnAddUser" class="margin-botton-20px btn btn-info margin-20px">
-          Add User</button>
+          Add Employee</button>
       </div>
       <div *ngIf="showAddUser">
-        <h3>Add User!</h3>
+        <h3>Add Employee!</h3>
         <form (ngSubmit)="registrateUser(form1)" #form1="ngForm">
           <div class="form-group">
             <label for="exampleNameR">Name</label>
@@ -49,6 +58,23 @@
                 {{ passwordR.errors.minlength.requiredLength }} characters!</div>
             </div>
           </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="form-group">
+                <label for="exampleInputEmail1R">Specify the role:</label>
+                <div class="form-check">
+                  <input required class="form-check-input" type="radio" id="user" ngModel #role="ngModel" name="role"
+                    value="user">
+                  <label for="user">User</label>
+                </div>
+                <div class="form-check">
+                  <input required class="form-check-input" type="radio" id="admin" ngModel #role="ngModel" name="role"
+                    value="admin">
+                  <label for="admin">Admin</label>
+                </div>
+              </div>
+            </div>
+          </div>
           <input type="submit" name="btnR" class="btn btn-primary" value="Registration" [disabled]="form1.invalid">
         </form>
       </div>
@@ -57,3 +83,78 @@
 </div>
 
 
+<app-dialog [(visible)]="deleteDialog">
+  <div class="container">
+    <div class="row centered">
+      <div class="col-lg-12 center">
+        <h2>Are you sure that you want to delete this employee?</h2>
+        <div class="form-group">
+          <div class="row btn-yes">
+            <button (click)="delete()" type="submit" name="btnUpdate" class="btn btn-success ">Yes</button>
+            <button (click)="noDelete()" *ngIf="closable" name="btnUpdate"
+              class="btn btn-danger margin-20px">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dialog>
+
+<app-dialog [(visible)]="updateDialog">
+  <div class="container">
+    <div class="row centered">
+      <div class="col-lg-12 center">
+        <h2 class="answer">{{answerEdit}}</h2>
+        <h2>Edit employee</h2>
+        <form [formGroup]="form">
+          <div class="form-group">
+              <label for="exampleNameR">Name</label>
+              <input class="form-control" minlength="3" name="name" formControlName="name" type="text"
+                id="exampleNameR" aria-describedby="emailHelp" placeholder="Name">
+          </div>
+          <div class="form-group">
+              <label for="exampleEmailR">Email</label>
+              <input class="form-control" minlength="3" name="email" formControlName="email" type="email"
+                id="exampleEmailR" aria-describedby="emailHelp" placeholder="Email">
+          </div>
+          <div class="form-group">
+              <label for="examplePasswordR">Password</label>
+              <input class="form-control" minlength="3" name="password" formControlName="password" type="text"
+                id="examplePasswordR" aria-describedby="emailHelp" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1R">Role:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="user" name="role" formControlName="role" value="user">
+              <label for="user">User</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="admin" name="role" formControlName="role" value="admin">
+              <label for="admin">Admin</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1R">Status:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="existing" name="status" formControlName="status"
+                value="existing">
+              <label for="existing">Existing</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="remote" name="status" formControlName="status"
+                value="remote">
+              <label for="remote">Remote</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row btn-yes">
+              <button (click)="update()" type="submit" name="btnUpdate" class="btn btn-success ">Edit</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</app-dialog>
